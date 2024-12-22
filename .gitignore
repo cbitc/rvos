@@ -1,0 +1,6 @@
+/test/
+/riscv-operating-system-mooc/
+/code/build/
+/code/.cache
+.*
+!.gitignore
