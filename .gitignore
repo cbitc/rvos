@@ -4,3 +4,4 @@
 /code/.cache
 .*
 !.gitignore
+/code/compile_commands.json
