@@ -18,11 +18,14 @@ SRCS_C := \
 kernel.c \
 uart.c \
 printf.c \
-
+riscv.c \
+schedule.c \
+user.c \
 
 SRCS_S := \
 start.S \
-memory.S
+memory.S \
+switch.S \
 
 OBJS_S := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.S,%.o,${SRCS_S}))
 OBJS_C := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.c,%.o,${SRCS_C}))

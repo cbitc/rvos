@@ -10,4 +10,7 @@ extern void uart_puts(char *s);
 int printf(const char *s, ...);
 void panic(char *s);
 
+void task_yield();
+void task_delay(u32 ms);
+
 #endif
