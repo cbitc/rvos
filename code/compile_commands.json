@@ -1,0 +1,87 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/riscv64-unknown-elf-gcc",
+      "-fno-builtin",
+      "-g",
+      "-Wall",
+      "-march=rv32g",
+      "-mabi=ilp32",
+      "-c",
+      "-o",
+      "build/kernel.o",
+      "kernel.c"
+    ],
+    "directory": "/home/cbitc/rvos/code",
+    "file": "/home/cbitc/rvos/code/kernel.c",
+    "output": "/home/cbitc/rvos/code/build/kernel.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/riscv64-unknown-elf-gcc",
+      "-fno-builtin",
+      "-g",
+      "-Wall",
+      "-march=rv32g",
+      "-mabi=ilp32",
+      "-c",
+      "-o",
+      "build/uart.o",
+      "uart.c"
+    ],
+    "directory": "/home/cbitc/rvos/code",
+    "file": "/home/cbitc/rvos/code/uart.c",
+    "output": "/home/cbitc/rvos/code/build/uart.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/riscv64-unknown-elf-gcc",
+      "-fno-builtin",
+      "-g",
+      "-Wall",
+      "-march=rv32g",
+      "-mabi=ilp32",
+      "-c",
+      "-o",
+      "build/printf.o",
+      "printf.c"
+    ],
+    "directory": "/home/cbitc/rvos/code",
+    "file": "/home/cbitc/rvos/code/printf.c",
+    "output": "/home/cbitc/rvos/code/build/printf.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/riscv64-unknown-elf-gcc",
+      "-fno-builtin",
+      "-g",
+      "-Wall",
+      "-march=rv32g",
+      "-mabi=ilp32",
+      "-c",
+      "-o",
+      "build/start.o",
+      "start.S"
+    ],
+    "directory": "/home/cbitc/rvos/code",
+    "file": "/home/cbitc/rvos/code/start.S",
+    "output": "/home/cbitc/rvos/code/build/start.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/riscv64-unknown-elf-gcc",
+      "-fno-builtin",
+      "-g",
+      "-Wall",
+      "-march=rv32g",
+      "-mabi=ilp32",
+      "-c",
+      "-o",
+      "build/memory.o",
+      "memory.S"
+    ],
+    "directory": "/home/cbitc/rvos/code",
+    "file": "/home/cbitc/rvos/code/memory.S",
+    "output": "/home/cbitc/rvos/code/build/memory.o"
+  }
+]
