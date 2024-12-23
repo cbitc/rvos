@@ -31,6 +31,9 @@ void uart_init() {
 
     lcr = 0;
     UART_WRITE_REG(LCR, lcr | (3 << 0));
+
+    u8 ier = UART_READ_REG(IER);
+    UART_WRITE_REG(IER, ier | (1 << 0));
 }
 
 void uart_putc(char ch) {
@@ -43,4 +46,10 @@ void uart_puts(char *s) {
     while (*s) {
         uart_putc(*s++);
     }
+}
+
+int uart_getc() {
+    while ((UART_READ_REG(LSR) & LSR_RX_READY) == 0)
+        ;
+    return UART_READ_REG(RHR);
 }

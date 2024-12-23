@@ -21,11 +21,14 @@ printf.c \
 riscv.c \
 schedule.c \
 user.c \
+trap.c \
+plic.c \
 
 SRCS_S := \
 start.S \
 memory.S \
 switch.S \
+entry.S \
 
 OBJS_S := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.S,%.o,${SRCS_S}))
 OBJS_C := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.c,%.o,${SRCS_C}))
