@@ -1,4 +1,3 @@
-#include "plic.h"
 #include "platform.h"
 #include "riscv.h"
 

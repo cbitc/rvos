@@ -1,4 +1,4 @@
-#include "platform.h"
+#define MAXNR_CPU 8
 
 .equ STACK_SIZE,1024
 .global _start

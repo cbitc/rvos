@@ -4,6 +4,7 @@
 #include "types.h"
 
 #define MIE_MEIE (1 << 11)
+#define MIE_MTIE (1 << 7)
 #define MSTATUS_MIE (1 << 3)
 
 typedef u32 reg_t;

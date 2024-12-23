@@ -5,6 +5,7 @@ extern void uart_init();
 extern void task_init();
 extern void trap_init();
 extern void plic_init();
+extern void timer_init();
 extern void schedule();
 
 void kernel_main() {
@@ -12,6 +13,7 @@ void kernel_main() {
     task_init();
     trap_init();
     plic_init();
+    timer_init();
 
     printf("not go here");
     while (1) {

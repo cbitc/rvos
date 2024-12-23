@@ -1,9 +1,9 @@
 #include "os.h"
-#include "plic.h"
+#include "platform.h"
 #include "riscv.h"
 
 extern void trap_entry();
-extern int uart_getc();
+extern void timer_handle();
 
 void trap_init() {
     w_mtvec((reg_t)trap_entry);
@@ -27,15 +27,14 @@ void trap_handle(reg_t cause) {
         if (code == 11) {
             printf("external intr!\n");
             external_interrupt_handle();
+        } else if (code == 7) {
+            printf("timer intr!\n");
+            timer_handle();
         } else {
             panic("unknow intr code\n");
         }
     } else {
-        printf("trap is excp\n");
-        if (code == 7) {
-            panic("store access fault!!!\n");
-        } else {
-            panic("unknown excecode \n");
-        }
+        printf("exception!!!: %d\n", code);
+        panic("I dont known how to do!\n");
     }
 }

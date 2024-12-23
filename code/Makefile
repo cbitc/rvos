@@ -23,6 +23,7 @@ schedule.c \
 user.c \
 trap.c \
 plic.c \
+timer.c \
 
 SRCS_S := \
 start.S \
