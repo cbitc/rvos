@@ -19,6 +19,7 @@ typedef struct context_s {
     reg_t a0,a1,a2,a3,a4,a5,a6,a7;
     reg_t s2,s3,s4,s5,s6,s7,s8,s9,s10,s11;
     reg_t t3,t4,t5,t6;
+    reg_t pc;
 }context_t;
 
 u32 hart_id();
@@ -34,6 +35,8 @@ void w_mstatus(reg_t v);
 
 reg_t r_mie();
 void w_mie(reg_t v);
+
+void set_global_interrupt(int on);
 
 
 #endif

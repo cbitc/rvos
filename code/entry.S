@@ -76,6 +76,8 @@
 trap_entry:
     csrrw     t6,mscratch,t6
     save_regs t6
+    csrr      t5,mepc
+    STORE     t5,31*REGSIZE(t6)
     mv        t5,t6
     csrrw     t6,mscratch,t6
     STORE     t6,30*REGSIZE(t5)
@@ -84,6 +86,8 @@ trap_entry:
     call      trap_handle
     
     csrr      t6,mscratch
+    LOAD      t5,31*REGSIZE(t6)
+    csrw      mepc,t5
     load_regs t6
 
     mret

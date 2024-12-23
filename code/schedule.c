@@ -17,15 +17,15 @@ extern void user_task2();
 
 static void task_create(void *target) {
     context_t *ctx = task_ctxs + task_nr;
-    ctx->ra = (u32)target;
-    ctx->sp = (u32)(task_stack[task_nr]) + TASK_STACK_SIZE - 1;
+    ctx->pc = (reg_t)target;
+    ctx->sp = (reg_t)(task_stack[task_nr]) + TASK_STACK_SIZE - 1;
     ++task_nr;
 }
 
 void schedule() {
     task_sn = (task_sn + 1) % task_nr;
     context_t *next_ctx = task_ctxs + task_sn;
-    switch_to(next_ctx);
+    asm volatile("csrw mscratch,%0" : "=r"(next_ctx) :);
 }
 
 void task_init() {

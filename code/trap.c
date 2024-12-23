@@ -25,10 +25,8 @@ void trap_handle(reg_t cause) {
     u32 code = cause & 0x7FFFFFFF;
     if (kind) {
         if (code == 11) {
-            printf("external intr!\n");
             external_interrupt_handle();
         } else if (code == 7) {
-            printf("timer intr!\n");
             timer_handle();
         } else {
             panic("unknow intr code\n");

@@ -19,5 +19,4 @@ void plic_init() {
     *(u32 *)PLIC_MTHRESHOLD(hart) = 0;
 
     w_mie(r_mie() | MIE_MEIE);
-    w_mstatus(r_mstatus() | MSTATUS_MIE);
 }

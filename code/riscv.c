@@ -39,3 +39,11 @@ reg_t r_mie() {
 void w_mie(reg_t v) {
     asm volatile("csrw mie,%0" ::"r"(v));
 }
+
+void set_global_interrupt(int on) {
+    if (on) {
+        w_mstatus(r_mstatus() | MSTATUS_MIE);
+    } else {
+        w_mstatus(r_mstatus() & (~MSTATUS_MIE));
+    }
+}
