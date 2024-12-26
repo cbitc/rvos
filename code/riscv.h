@@ -9,8 +9,9 @@
 
 typedef u32 reg_t;
 
-u32 hart_id();
+reg_t hart_id();
 
+reg_t r_tp();
 
 reg_t r_mscratch();
 void w_mscratch(reg_t v);

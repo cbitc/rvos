@@ -3,11 +3,11 @@
 #include "riscv.h"
 #include "types.h"
 
-#define TIMER_INTERVAL 100000L
+#define TIMER_INTERVAL 1000000L
 
 static u64 tick = 0;
 
-extern void schedule();
+extern void sched();
 
 static void
 timer_load(u64 interval) {
@@ -25,4 +25,5 @@ void
 timer_handle() {
     tick++;
     timer_load(TIMER_INTERVAL);
+    sched();
 }

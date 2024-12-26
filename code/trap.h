@@ -3,6 +3,12 @@
 
 #include "riscv.h"
 
+typedef struct switch_frame_s {
+    reg_t ra;
+    reg_t sp;
+    reg_t s0,s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11;
+}switch_frame_t;
+
 typedef struct trap_frame_s {
     reg_t ra;
     reg_t sp;

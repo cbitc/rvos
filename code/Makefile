@@ -23,11 +23,13 @@ user.c \
 trap.c \
 plic.c \
 timer.c \
+schedule.c \
 
 SRCS_S := \
 start.S \
 memory.S \
 entry.S \
+swtch.S \
 
 
 OBJS_S := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.S,%.o,${SRCS_S}))

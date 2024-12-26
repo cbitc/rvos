@@ -7,6 +7,8 @@ extern void uart_init();
 extern void trap_init();
 extern void plic_init();
 extern void timer_init();
+extern void task_init();
+extern void scheduler();
 
 void
 kernel_main() {
@@ -14,8 +16,7 @@ kernel_main() {
     trap_init();
     plic_init();
     timer_init();
-    intr_on();
-    while (true)
-        ;
+    task_init();
+    scheduler();
     panic("not go here!!!\n");
 }

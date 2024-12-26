@@ -2,6 +2,7 @@
 #include "os.h"
 #include "platform.h"
 #include "riscv.h"
+#include "schedule.h"
 
 extern void trap_entry();
 extern void trap_exit();

@@ -1,5 +1,7 @@
 #include "os.h"
 
+extern void yield();
+
 void user_task1() {
     printf("task1\n");
     u32 counter = 0;

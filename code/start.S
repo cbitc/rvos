@@ -13,7 +13,7 @@ _start:
 	la   sp , stacks + STACK_SIZE
     add  sp , sp , t0 
 
-	li	 t0 , 1 << 7
+	li	 t0 , 3 << 11 | 1 << 7
 	csrr a1 , mstatus
 	or   t0 , t0 , a1
 	csrw mstatus , t0
