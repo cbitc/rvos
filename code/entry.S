@@ -82,9 +82,12 @@ trap_entry:
     csrrw     t6,mscratch,t6
     STORE     t6,30*REGSIZE(t5)
 
-    csrr      a0,mcause
-    call      trap_handle
+    j         trap_handle
     
+
+.global trap_exit
+.balign 4
+trap_exit:
     csrr      t6,mscratch
     LOAD      t5,31*REGSIZE(t6)
     csrw      mepc,t5

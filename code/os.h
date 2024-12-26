@@ -4,10 +4,19 @@
 #include "types.h"
 #include "platform.h"
 
-int printf(const char *s, ...);
-void panic(char *s);
+#define assert(expr)                                                           \
+    if (expr)                                                                  \
+        ;                                                                      \
+    else                                                                       \
+        assertion_failure(#expr)
 
-void task_yield();
-void task_delay(u32 ms);
+
+int printf(const char *s, ...);
+
+void assertion_failure(char* expr);
+void panic(const char *s,...);
+
+
+
 
 #endif

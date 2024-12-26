@@ -20,30 +20,28 @@ void inline w_mscratch(reg_t v) {
     asm volatile("csrw mscratch,%0" ::"r"(v));
 }
 
-reg_t r_mstatus() {
+reg_t inline r_mstatus() {
     reg_t x;
     asm volatile("csrr %0,mstatus" : "=r"(x));
     return x;
 }
 
-void w_mstatus(reg_t v) {
+void inline w_mstatus(reg_t v) {
     asm volatile("csrw mstatus,%0" ::"r"(v));
 }
 
-reg_t r_mie() {
+reg_t inline r_mie() {
     reg_t x;
     asm volatile("csrr %0,mie" : "=r"(x));
     return x;
 }
 
-void w_mie(reg_t v) {
+void inline w_mie(reg_t v) {
     asm volatile("csrw mie,%0" ::"r"(v));
 }
 
-void set_global_interrupt(int on) {
-    if (on) {
-        w_mstatus(r_mstatus() | MSTATUS_MIE);
-    } else {
-        w_mstatus(r_mstatus() & (~MSTATUS_MIE));
-    }
+reg_t inline r_mcause() {
+    reg_t x;
+    asm volatile("csrr %0,mcause" : "=r"(x) :);
+    return x;
 }

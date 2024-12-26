@@ -3,7 +3,8 @@
 #include <stdarg.h>
 #include <stddef.h>
 
-static int _vsnprintf(char *out, size_t n, const char *s, va_list vl) {
+static int
+_vsnprintf(char *out, size_t n, const char *s, va_list vl) {
     int format = 0;
     int longarg = 0;
     size_t pos = 0;
@@ -106,7 +107,8 @@ static int _vsnprintf(char *out, size_t n, const char *s, va_list vl) {
 
 static char out_buf[1000]; // buffer for _vprintf()
 
-static int _vprintf(const char *s, va_list vl) {
+static int
+_vprintf(const char *s, va_list vl) {
     int res = _vsnprintf(NULL, -1, s, vl);
     if (res + 1 >= sizeof(out_buf)) {
         uart_puts("error: output string size overflow\n");
@@ -118,7 +120,15 @@ static int _vprintf(const char *s, va_list vl) {
     return res;
 }
 
-int printf(const char *s, ...) {
+static void
+spin(char *s) {
+    printf(s);
+    while (true)
+        ;
+}
+
+int
+printf(const char *s, ...) {
     int res = 0;
     va_list vl;
     va_start(vl, s);
@@ -127,10 +137,17 @@ int printf(const char *s, ...) {
     return res;
 }
 
-void panic(char *s) {
-    printf("panic: ");
-    printf(s);
-    printf("\n");
-    while (1) {
-    };
+void
+assertion_failure(char *expr) {
+    printf("\nassert(%s) failed!!!\n", expr);
+    spin("assertion_failure()\n");
+}
+
+void
+panic(const char *s, ...) {
+    va_list vl;
+    va_start(vl, s);
+    _vprintf(s, vl);
+    va_end(vl);
+    spin("panic!!!\n");
 }

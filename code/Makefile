@@ -17,9 +17,8 @@ OUTPUT_PATH := build
 SRCS_C := \
 kernel.c \
 uart.c \
-printf.c \
+os.c \
 riscv.c \
-schedule.c \
 user.c \
 trap.c \
 plic.c \
@@ -29,6 +28,7 @@ SRCS_S := \
 start.S \
 memory.S \
 entry.S \
+
 
 OBJS_S := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.S,%.o,${SRCS_S}))
 OBJS_C := $(addprefix ${OUTPUT_PATH}/,$(patsubst %.c,%.o,${SRCS_C}))
