@@ -1,4 +1,5 @@
 #include "include/os.h"
+#include "include/spinlock.h"
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -105,10 +106,12 @@ _vsnprintf(char *out, size_t n, const char *s, va_list vl) {
     return pos;
 }
 
-static char out_buf[1000]; // buffer for _vprintf()
+static char out_buf[1024]; // buffer for _vprintf()
 
+static spinlock_t out_buf_lock;
 static int
 _vprintf(const char *s, va_list vl) {
+    spinlock_aquire(&out_buf_lock);
     int res = _vsnprintf(NULL, -1, s, vl);
     if (res + 1 >= sizeof(out_buf)) {
         uart_puts("error: output string size overflow\n");
@@ -117,6 +120,7 @@ _vprintf(const char *s, va_list vl) {
     }
     _vsnprintf(out_buf, res + 1, s, vl);
     uart_puts(out_buf);
+    spinlock_release(&out_buf_lock);
     return res;
 }
 
@@ -152,6 +156,11 @@ panic(const char *s, ...) {
     spin("panic!!!\n");
 }
 
+void
+lib_init() {
+    spinlock_init(&out_buf_lock);
+}
+
 inline u32
 hart_id() {
     return r_tp();
@@ -165,4 +174,9 @@ intr_on() {
 inline void
 intr_off() {
     w_mstatus(r_mstatus() & ~MSTATUS_MIE);
+}
+
+inline int
+intr_get() {
+    return (r_mstatus() & MSTATUS_MIE) == 0 ? 0 : 1;
 }

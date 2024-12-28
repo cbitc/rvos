@@ -43,6 +43,11 @@ typedef struct process_s {
 typedef struct cpu_s {
     switch_frame_t scheduler_point;
     process_t* cur_proc;
+    int nr_off;
+    bool is_intr_on; 
 }cpu_t;
+
+cpu_t* mycpu();
+process_t* myproc();
 
 #endif

@@ -23,5 +23,7 @@ u32 hart_id();
 void intr_on();
 void intr_off();
 
+int intr_get();
+
 
 #endif

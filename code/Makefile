@@ -24,6 +24,7 @@ trap.c \
 plic.c \
 timer.c \
 schedule.c \
+spinlock.c \
 
 SRCS_S := \
 start.S \
