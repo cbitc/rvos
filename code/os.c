@@ -1,5 +1,4 @@
-#include "os.h"
-#include "riscv.h"
+#include "include/os.h"
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -167,5 +166,3 @@ inline void
 intr_off() {
     w_mstatus(r_mstatus() & ~MSTATUS_MIE);
 }
-
-

@@ -1,4 +1,4 @@
-#include "os.h"
+#include "include/os.h"
 
 #define UART_REG(reg) ((volatile u8 *)(UART0 + reg))
 

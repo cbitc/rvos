@@ -1,5 +1,5 @@
-#include "os.h"
-#include "process.h"
+#include "include/os.h"
+#include "include/process.h"
 
 extern void trap_entry();
 extern void trap_exit();

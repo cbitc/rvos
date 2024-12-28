@@ -1,5 +1,5 @@
-#include "os.h"
-#include "process.h"
+#include "include/os.h"
+#include "include/process.h"
 
 #define MAXNR_TASK 8
 #define TASK_STACK_SIZE 1024
@@ -86,4 +86,3 @@ sched_init() {
 
     w_mie(r_mie() | MIE_MSIE);
 }
-

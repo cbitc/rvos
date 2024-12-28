@@ -1,4 +1,4 @@
-#include "os.h"
+#include "include/os.h"
 
 int
 plic_claim() {

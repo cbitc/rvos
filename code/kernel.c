@@ -1,4 +1,4 @@
-#include "os.h"
+#include "include/os.h"
 
 extern void uart_init();
 extern void trap_init();
