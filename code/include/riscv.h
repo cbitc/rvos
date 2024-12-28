@@ -19,6 +19,9 @@ void w_mscratch(reg_t v);
 
 void w_mtvec(reg_t v);
 
+reg_t r_mepc();
+void w_mepc(reg_t v);
+
 reg_t r_mstatus();
 void w_mstatus(reg_t v);
 
@@ -26,6 +29,7 @@ reg_t r_mie();
 void w_mie(reg_t v);
 
 reg_t r_mcause();
+
 
 
 #endif

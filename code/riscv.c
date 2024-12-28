@@ -32,6 +32,18 @@ w_mscratch(reg_t v) {
 }
 
 inline reg_t
+r_mepc() {
+    reg_t x;
+    asm volatile("csrr %0,mepc" : "=r"(x));
+    return x;
+}
+
+inline void
+w_mepc(reg_t v) {
+    asm volatile("csrw mepc,%0" ::"r"(v));
+}
+
+inline reg_t
 r_mstatus() {
     reg_t x;
     asm volatile("csrr %0,mstatus" : "=r"(x));

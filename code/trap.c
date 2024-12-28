@@ -5,6 +5,7 @@ extern void trap_entry();
 extern void trap_exit();
 extern void timer_handle();
 extern void sched();
+extern void syscall_handle(trap_frame_t *ctx);
 
 static void
 external_interrupt_handle() {
@@ -47,8 +48,16 @@ trap_handle() {
             panic("unknow intr code\n");
         }
     } else {
-        printf("exception!!!: %d\n", code);
-        panic("I dont known how to do!\n");
+        if (code == 8) {
+            trap_frame_t *ctx = (trap_frame_t *)r_mscratch();
+            syscall_handle(ctx);
+        } else if (code == 11) {
+            trap_frame_t *ctx = (trap_frame_t *)r_mscratch();
+            syscall_handle(ctx);
+        } else {
+            printf("exception!!!: %d\n", code);
+            panic("I dont known how to do!\n");
+        }
     }
     trap_return();
 }
