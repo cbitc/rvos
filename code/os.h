@@ -3,6 +3,7 @@
 
 #include "types.h"
 #include "platform.h"
+#include "riscv.h"
 
 #define assert(expr)                                                           \
     if (expr)                                                                  \
@@ -17,6 +18,10 @@ void assertion_failure(char* expr);
 void panic(const char *s,...);
 
 
+u32 hart_id();
+
+void intr_on();
+void intr_off();
 
 
 #endif

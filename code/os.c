@@ -1,4 +1,5 @@
 #include "os.h"
+#include "riscv.h"
 
 #include <stdarg.h>
 #include <stddef.h>
@@ -151,3 +152,20 @@ panic(const char *s, ...) {
     va_end(vl);
     spin("panic!!!\n");
 }
+
+inline u32
+hart_id() {
+    return r_tp();
+}
+
+inline void
+intr_on() {
+    w_mstatus(r_mstatus() | MSTATUS_MIE);
+}
+
+inline void
+intr_off() {
+    w_mstatus(r_mstatus() & ~MSTATUS_MIE);
+}
+
+

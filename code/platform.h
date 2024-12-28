@@ -19,6 +19,7 @@
 #define CLINT_BASE 0x2000000L
 #define CLINT_MTIME (CLINT_BASE + 0xBFF8)
 #define CLINT_MTIMECMP(hart) (CLINT_BASE + 0x4000 + (hart) * 8)
+#define CLINT_MSIP(hart) (CLINT_BASE + 4 * (hart))
 
 int plic_claim();
 void plic_complete();

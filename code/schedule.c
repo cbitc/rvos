@@ -1,7 +1,5 @@
-#include "schedule.h"
 #include "os.h"
-#include "platform.h"
-#include "riscv.h"
+#include "process.h"
 
 #define MAXNR_TASK 8
 #define TASK_STACK_SIZE 1024
@@ -16,7 +14,7 @@ extern void trap_return();
 extern void user_task1();
 extern void user_task2();
 
-static void
+void
 task_create(void *target) {
     if (proc_nr >= MAXNR_TASK) {
         panic("out of number of task!\n");
@@ -34,17 +32,12 @@ task_create(void *target) {
     proc_nr++;
 }
 
-inline reg_t
-cpuid() {
-    return hart_id();
-}
-
-inline cpu_t *
+cpu_t *
 mycpu() {
-    return cpus + cpuid();
+    return cpus + hart_id();
 }
 
-inline process_t *
+process_t *
 myproc() {
     return mycpu()->cur_proc;
 }
@@ -82,16 +75,15 @@ sched() {
 
 void
 yield() {
-    cpu_t *cpu = mycpu();
-    cpu->cur_proc->state = READY;
-    swtch(&cpu->cur_proc->switch_frame, &cpu->scheduler_point);
+    *(reg_t *)CLINT_MSIP(hart_id()) = 1;
 }
 
 void
-task_init() {
+sched_init() {
     static process_t proc0;
     cpu_t *cpu = mycpu();
     cpu->cur_proc = &proc0;
-    task_create((void *)user_task1);
-    task_create((void *)user_task2);
+
+    w_mie(r_mie() | MIE_MSIE);
 }
+

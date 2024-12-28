@@ -1,5 +1,4 @@
-#include "platform.h"
-#include "types.h"
+#include "os.h"
 
 #define UART_REG(reg) ((volatile u8 *)(UART0 + reg))
 
@@ -22,7 +21,8 @@
 #define MSR 6 // Modem Status Register
 #define SPR 7 // ScratchPad Register
 
-void uart_init() {
+void
+uart_init() {
     UART_WRITE_REG(IER, 0x00);
     u8 lcr = UART_READ_REG(LCR);
     UART_WRITE_REG(LCR, lcr | (1 << 7));
@@ -36,19 +36,22 @@ void uart_init() {
     UART_WRITE_REG(IER, ier | (1 << 0));
 }
 
-void uart_putc(char ch) {
+void
+uart_putc(char ch) {
     while ((UART_READ_REG(LSR) & LSR_TX_IDLE) == 0)
         ;
     UART_WRITE_REG(THR, ch);
 }
 
-void uart_puts(char *s) {
+void
+uart_puts(char *s) {
     while (*s) {
         uart_putc(*s++);
     }
 }
 
-int uart_getc() {
+int
+uart_getc() {
     while ((UART_READ_REG(LSR) & LSR_RX_READY) == 0)
         ;
     return UART_READ_REG(RHR);

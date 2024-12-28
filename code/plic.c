@@ -1,5 +1,4 @@
-#include "platform.h"
-#include "riscv.h"
+#include "os.h"
 
 int
 plic_claim() {

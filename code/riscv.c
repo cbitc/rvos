@@ -1,15 +1,17 @@
 #include "riscv.h"
 
 inline reg_t
-r_tp() {
+r_mhartid() {
     reg_t x;
-    asm volatile("mv %0,tp" : "=r"(x));
+    asm volatile("csrr %0,mhartid" : "=r"(x));
     return x;
 }
 
 inline reg_t
-hart_id() {
-    return r_tp();
+r_tp() {
+    reg_t x;
+    asm volatile("mv %0,tp" : "=r"(x));
+    return x;
 }
 
 inline void

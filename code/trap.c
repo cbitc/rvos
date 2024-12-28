@@ -1,20 +1,10 @@
-#include "trap.h"
 #include "os.h"
-#include "platform.h"
-#include "riscv.h"
-#include "schedule.h"
+#include "process.h"
 
 extern void trap_entry();
 extern void trap_exit();
 extern void timer_handle();
-
-static trap_frame_t trap_frame0;
-
-void
-trap_init() {
-    w_mtvec((reg_t)trap_entry);
-    w_mscratch((reg_t)&trap_frame0);
-}
+extern void sched();
 
 static void
 external_interrupt_handle() {
@@ -28,12 +18,11 @@ external_interrupt_handle() {
     plic_complete(irq);
 }
 
-void inline intr_on() {
-    w_mstatus(r_mstatus() | MSTATUS_MIE);
-}
-
-void inline intr_off() {
-    w_mstatus(r_mstatus() & ~MSTATUS_MIE);
+void
+trap_init() {
+    static trap_frame_t trap_frame0;
+    w_mtvec((reg_t)trap_entry);
+    w_mscratch((reg_t)&trap_frame0);
 }
 
 void
@@ -49,6 +38,9 @@ trap_handle() {
     if (kind) {
         if (code == 11) {
             external_interrupt_handle();
+        } else if (code == 3) {
+            *(reg_t *)CLINT_MSIP(hart_id()) = 0;
+            sched();
         } else if (code == 7) {
             timer_handle();
         } else {

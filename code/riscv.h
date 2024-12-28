@@ -5,11 +5,12 @@
 
 #define MIE_MEIE (1 << 11)
 #define MIE_MTIE (1 << 7)
+#define MIE_MSIE (1 << 3)
 #define MSTATUS_MIE (1 << 3)
 
 typedef u32 reg_t;
 
-reg_t hart_id();
+reg_t r_mhartid();
 
 reg_t r_tp();
 
@@ -25,7 +26,6 @@ reg_t r_mie();
 void w_mie(reg_t v);
 
 reg_t r_mcause();
-
 
 
 #endif

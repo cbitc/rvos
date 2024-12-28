@@ -1,7 +1,4 @@
 #include "os.h"
-#include "platform.h"
-#include "riscv.h"
-#include "types.h"
 
 #define TIMER_INTERVAL 1000000L
 
